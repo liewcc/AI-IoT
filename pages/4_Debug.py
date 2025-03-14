@@ -34,7 +34,7 @@ log_box = st.empty()
 thread = threading.Thread(target=socket_communication, args=(log_queue,))
 thread.start()
 
-def update_log():
+def update_log(log_id):
     log_messages = []
     while not log_queue.empty():
         log_message = log_queue.get()
@@ -42,8 +42,11 @@ def update_log():
 
     if log_messages:
         full_log = "\n".join(log_messages)
-        log_box.text_area("Output", value=full_log, height=200)
+        log_box.text_area("Output", value=full_log, height=200, key=log_id)
 
+log_id = 0
 while True:
-    update_log()
+    update_log(log_id)
+    log_id += 1
     time.sleep(1)
+    st.rerun()
