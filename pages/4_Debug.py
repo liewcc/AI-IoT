@@ -2,6 +2,7 @@ import streamlit as st
 import socket
 import threading
 import time
+from collections import deque
 from queue import Queue
 
 def socket_communication(log_queue):
@@ -34,19 +35,19 @@ log_box = st.empty()
 thread = threading.Thread(target=socket_communication, args=(log_queue,))
 thread.start()
 
-def update_log(log_id):
-    log_messages = []
+# Use a deque to store log messages and update less frequently
+log_messages = deque(maxlen=100)
+
+def update_log():
     while not log_queue.empty():
         log_message = log_queue.get()
         log_messages.append(log_message)
-
+    
     if log_messages:
         full_log = "\n".join(log_messages)
-        log_box.text_area("Output", value=full_log, height=200, key=log_id)
+        log_box.text_area("Output", value=full_log, height=200, key="log_box")
 
-log_id = 0
 while True:
-    update_log(log_id)
-    log_id += 1
+    update_log()
     time.sleep(1)
     st.rerun()
