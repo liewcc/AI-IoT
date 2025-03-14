@@ -1,34 +1,38 @@
 import socket
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
 def start_server():
-    host = '103.169.90.54'
+    host = '0.0.0.0'  # Bind to all interfaces
     port = 65432
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((host, port))
     s.listen(1)
-    print(f"Server listening on {host}:{port}")
+    logging.info(f"Server listening on {host}:{port}")
 
     try:
         while True:
             conn, addr = s.accept()
-            print(f"Connected by {addr}")
+            logging.info(f"Connected by {addr}")
             while True:
                 try:
                     data = conn.recv(1024)
                     if data:
                         hex_data = data.hex()
-                        print(f"Received data in hex: {hex_data}")
+                        logging.info(f"Received data in hex: {hex_data}")
                         conn.sendall(data)
                     else:
                         break
                 except socket.error as e:
-                    print(f"Socket error: {e}")
+                    logging.error(f"Socket error: {e}")
                     break
                 except Exception as e:
-                    print(f"Error: {e}")
+                    logging.error(f"Error: {e}")
                     break
     except KeyboardInterrupt:
-        print("Server shutting down...")
+        logging.info("Server shutting down...")
     finally:
         s.close()
 
