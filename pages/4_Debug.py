@@ -1,23 +1,30 @@
 import streamlit as st
 import socket
 import threading
+import time
 
-# Function to handle socket communication
 def socket_communication(log_box):
-    host = '103.169.90.54'
+    host = '127.0.0.1'
     port = 65432
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((host, port))
 
     while True:
-        data = s.recv(1024)
-        if not data:
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((host, port))
+            while True:
+                data = s.recv(1024)
+                if not data:
+                    break
+                log_box.text_area("Output", value=data.decode('utf-8'), height=200)
+            s.close()
             break
-        log_box.text_area("Output", data.decode('utf-8'), height=200)
+        except ConnectionRefusedError:
+            log_box.text_area("Output", value="Connection refused. Retrying in 5 seconds...", height=200)
+            time.sleep(5)
+        except Exception as e:
+            log_box.text_area("Output", value=f"An error occurred: {e}", height=200)
+            break
 
-    s.close()
-
-# Streamlit app
 st.title("TCP Socket Test")
 
 log_box = st.empty()
