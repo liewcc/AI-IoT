@@ -10,12 +10,14 @@ def start_server():
     conn, addr = s.accept()
     with conn:
         print(f"Connected by {addr}")
-        while True:
-            data = conn.recv(1024)
-            if not data:
-                break
-            hex_data = data.hex()
-            print(f"Received data in hex: {hex_data}")
-            conn.sendall(data)
+        try:
+            while True:
+                data = conn.recv(1024)
+                if data:
+                    hex_data = data.hex()
+                    print(f"Received data in hex: {hex_data}")
+                    conn.sendall(data)
+        except KeyboardInterrupt:
+            print("Server shutting down...")
 
 start_server()
