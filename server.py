@@ -17,6 +17,9 @@ def start_server():
                     hex_data = data.hex()
                     print(f"Received data in hex: {hex_data}")
                     conn.sendall(data)
+                else:
+                    # if no data is received, break out of the loop
+                    break
         except KeyboardInterrupt:
             print("Server shutting down...")
 
