@@ -14,6 +14,8 @@ def start_server():
             data = conn.recv(1024)
             if not data:
                 break
+            hex_data = data.hex()
+            print(f"Received data in hex: {hex_data}")
             conn.sendall(data)
 
 start_server()
