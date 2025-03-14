@@ -7,20 +7,20 @@ def start_server():
     s.bind((host, port))
     s.listen(1)
     print(f"Server listening on {host}:{port}")
-    conn, addr = s.accept()
-    with conn:
-        print(f"Connected by {addr}")
-        try:
-            while True:
-                data = conn.recv(1024)
-                if data:
+
+    try:
+        while True:
+            conn, addr = s.accept()
+            print(f"Connected by {addr}")
+            with conn:
+                while True:
+                    data = conn.recv(1024)
+                    if not data:
+                        break
                     hex_data = data.hex()
                     print(f"Received data in hex: {hex_data}")
                     conn.sendall(data)
-                else:
-                    # if no data is received, break out of the loop
-                    break
-        except KeyboardInterrupt:
-            print("Server shutting down...")
+    except KeyboardInterrupt:
+        print("Server shutting down...")
 
 start_server()
