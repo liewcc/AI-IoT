@@ -9,3 +9,5 @@ langchain_community
 langchain_ollama
 pdfplumber
 pyautogui
+pymodbus
+pyserial

@@ -1,0 +1,131 @@
+[
+  {
+    "Modbus Address": 8001,
+    "Description": "采集点 1 通道",
+    "R/W": "R/W",
+    "Unit": "0-2",
+    "Data Type": "UINT16"
+  },
+  {
+    "Modbus Address": 8002,
+    "Description": "采集点 1 地址高 16 位",
+    "R/W": "R/W",
+    "Unit": "0-65535",
+    "Data Type": "UINT16"
+  },
+  {
+    "Modbus Address": 8003,
+    "Description": "采集点 1 地址低 16 位",
+    "R/W": "R/W",
+    "Unit": "*0-65535",
+    "Data Type": "UINT16"
+  },
+  {
+    "Modbus Address": 8004,
+    "Description": "采集点 1 设备类型",
+    "R/W": "R/W",
+    "Unit": "0-100",
+    "Data Type": "UINT16"
+  },
+  {
+    "Modbus Address": 9001,
+    "Description": "超声波放电量",
+    "R/W": "R",
+    "Unit": "*0.1dBm",
+    "Data Type": "INT16"
+  },
+  {
+    "Modbus Address": 9002,
+    "Description": "超声波放电次数",
+    "R/W": "R",
+    "Unit": "次",
+    "Data Type": "UINT16"
+  },
+  {
+    "Modbus Address": 9003,
+    "Description": "地电波放电量",
+    "R/W": "R",
+    "Unit": "*0.1dBm",
+    "Data Type": "INT16"
+  },
+  {
+    "Modbus Address": 9004,
+    "Description": "地电波放电次数",
+    "R/W": "R",
+    "Unit": "次",
+    "Data Type": "UINT16"
+  },
+  {
+    "Modbus Address": 9005,
+    "Description": "超声波告警等级",
+    "R/W": "R",
+    "Unit": "0-2",
+    "Data Type": "INT16",
+    "States": {
+      "0": "正常",
+      "1": "异常",
+      "2": "危险"
+    }
+  },
+  {
+    "Modbus Address": 9006,
+    "Description": "地电波告警等级",
+    "R/W": "R",
+    "Unit": "0-2",
+    "Data Type": "INT16",
+    "States": {
+      "0": "正常",
+      "1": "异常",
+      "2": "危险"
+    }
+  },
+  {
+    "Modbus Address": 9007,
+    "Description": "超声波 50Hz 相关性",
+    "R/W": "R",
+    "Unit": "dBuV",
+    "Data Type": "INT16"
+  },
+  {
+    "Modbus Address": 9008,
+    "Description": "超声波 100Hz 相关性",
+    "R/W": "R",
+    "Unit": "dBuV",
+    "Data Type": "INT16"
+  },
+  {
+    "Modbus Address": 9009,
+    "Description": "超声波电类型",
+    "R/W": "R",
+    "Unit": "0-7",
+    "Data Type": "UINT16",
+    "States": {
+      "0": "正常",
+      "1": "针尖放电",
+      "2": "悬浮放电",
+      "4": "颗粒放电",
+      "7": "其他放电"
+    }
+  },
+  {
+    "Modbus Address": 9010,
+    "Description": "地电波电类型",
+    "R/W": "R",
+    "Unit": "0-2",
+    "Data Type": "UINT16",
+    "States": {
+      "0": "正常",
+      "1": "针尖放电",
+      "2": "悬浮放电",
+      "4": "颗粒放电",
+      "7": "其他放电"
+    }
+  },
+  {
+    "Modbus Address": 9200,
+    "Description": "地电波放电类型",
+    "R/W": "R",
+    "Unit": "0-2",
+    "Data Type": "UINT16"
+  }
+]
