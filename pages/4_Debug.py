@@ -4,19 +4,22 @@ import threading
 import time
 
 def socket_communication(log_box):
-    host = '127.0.0.1'
+    host = '103.169.90.54'
     port = 65432
 
     while True:
         try:
+            st.write("Attempting to connect...")
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((host, port))
+            st.write("Connected successfully")
             while True:
                 data = s.recv(1024)
                 if not data:
                     break
                 log_box.text_area("Output", value=data.decode('utf-8'), height=200)
             s.close()
+            st.write("Connection closed")
             break
         except ConnectionRefusedError:
             log_box.text_area("Output", value="Connection refused. Retrying in 5 seconds...", height=200)

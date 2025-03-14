@@ -1,11 +1,12 @@
 import socket
 
 def start_server():
-    host = '127.0.0.1'
+    host = '103.169.90.54'
     port = 65432
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((host, port))
     s.listen(1)
+    print(f"Server listening on {host}:{port}")
     conn, addr = s.accept()
     with conn:
         print(f"Connected by {addr}")
