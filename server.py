@@ -17,24 +17,32 @@ def start_server():
             conn, addr = s.accept()
             logging.info(f"Connected by {addr}")
             try:
-                conn.settimeout(1)  # Set timeout for the connection
+                # Set timeout for receiving data
+                conn.settimeout(60)
+                
+                # Receive and handle incoming data
                 while True:
                     data = conn.recv(1024)
                     if data:
                         hex_data = data.hex()
                         logging.info(f"Received data in hex: {hex_data}")
-                        conn.sendall(data)
+                        conn.sendall(data)  # Optional: Echo back the data
                     else:
                         break
+            except socket.timeout:
+                logging.error("Socket error: timed out while receiving data.")
             except socket.error as e:
                 logging.error(f"Socket error: {e}")
             except Exception as e:
                 logging.error(f"Error: {e}")
             finally:
+                # Close connection after processing
                 conn.close()
+                logging.info(f"Connection closed with {addr}")
     except KeyboardInterrupt:
         logging.info("Server shutting down...")
     finally:
         s.close()
 
-start_server()
+if __name__ == "__main__":
+    start_server()
