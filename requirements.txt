@@ -1,6 +1,5 @@
 streamlit
 streamlit-extras
-
 psutil
 paramiko
 streamlit-ttyd
@@ -11,3 +10,4 @@ pdfplumber
 pyautogui
 pymodbus
 pyserial
+serial
