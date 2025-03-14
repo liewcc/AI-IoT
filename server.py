@@ -12,15 +12,24 @@ def start_server():
         while True:
             conn, addr = s.accept()
             print(f"Connected by {addr}")
-            with conn:
-                while True:
+            while True:
+                try:
                     data = conn.recv(1024)
-                    if not data:
+                    if data:
+                        hex_data = data.hex()
+                        print(f"Received data in hex: {hex_data}")
+                        conn.sendall(data)
+                    else:
                         break
-                    hex_data = data.hex()
-                    print(f"Received data in hex: {hex_data}")
-                    conn.sendall(data)
+                except socket.error as e:
+                    print(f"Socket error: {e}")
+                    break
+                except Exception as e:
+                    print(f"Error: {e}")
+                    break
     except KeyboardInterrupt:
         print("Server shutting down...")
+    finally:
+        s.close()
 
 start_server()
